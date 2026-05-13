@@ -152,13 +152,17 @@ const companyKeyword = ref("");
 const selectedEducation = ref("");
 const selectedSalary = ref("");
 const getEducationLabel = (educationId: number): string => {
-  const education = educationList.find((item) => item.id === educationId);
+  const education = educationList.find(
+    (item: { id: number; label: string }) => item.id === educationId,
+  );
 
   return education?.label || "不限";
 };
 
 const getSalaryLabel = (salaryId: number): string => {
-  const salary = salaryList.find((item) => item.id === salaryId);
+  const salary = salaryList.find(
+    (item: { id: number; label: string }) => item.id === salaryId,
+  );
 
   return salary?.label || "面議";
 };
@@ -169,7 +173,7 @@ const totalPages = computed(() => {
   return Math.ceil(filteredJobList.value.length / ITEMS_PER_PAGE);
 });
 const filteredJobList = computed(() => {
-  return jobList.filter((job) => {
+  return jobList.filter((job: any) => {
     const matchCompany = job.companyName.includes(companyKeyword.value);
 
     const matchEducation =
